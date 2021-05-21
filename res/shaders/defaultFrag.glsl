@@ -1,5 +1,7 @@
 #version 330 core
 
+#define INVALID_TYPE_COLOR vec4(1.f, .2f, .95f, 1.f)
+
 #define MAX_LIGHTS 256
 #define POINT_LIGHT_A 3.0f
 #define POINT_LIGHT_B 0.7f
@@ -106,17 +108,22 @@ vec4 spotLight(light l)
 
 void main()
 {
-	vec4 color = vec4(0.f);
+	vec4 endcolor = vec4(0.f);
 
 	for (int i = 0; i < nrOfLights; i++)
 	{
 		if (lights[i].type == 0)
-			color += pointLight(lights[i]);
+			endcolor += pointLight(lights[i]);
 		else if (lights[i].type == 1)
-			color += direcLight(lights[i]);
+			endcolor += direcLight(lights[i]);
 		else if (lights[i].type == 2)
-			color += spotLight(lights[i]);
+			endcolor += spotLight(lights[i]);
+		else
+			endcolor = INVALID_TYPE_COLOR;
 	}
 
-	FragColor = color;
+	if (texture(diffuse0, texCoord) == vec4(0.f, 0.f, 0.f, 1.f))
+		endcolor = INVALID_TYPE_COLOR;
+
+	FragColor = endcolor;
 }

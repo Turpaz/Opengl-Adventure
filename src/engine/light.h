@@ -35,8 +35,8 @@ class Light
 public:
 	Transform transform;
 
-	char type;
-	glm::vec4 color;
+	char type = POINT_LIGHT_TYPE;
+	glm::vec4 color = glm::vec4(1.f);
 
 	float intensity = 1.0f;
 	float ambient = 0.2f;
@@ -48,8 +48,8 @@ private:
 	unsigned int ID;
 	Shader* shader;
 public:
-	Light(Shader& sh, char t = POINT_LIGHT_TYPE, glm::vec3 pos = glm::vec3(0.f), glm::vec3 rot = glm::vec3(0.f), glm::vec4 col = glm::vec4(1.f))
-		: type(t), color(col), shader(&sh)
+	Light(Shader& sh, char t = POINT_LIGHT_TYPE, glm::vec3 pos = glm::vec3(0.f), glm::vec3 rot = glm::vec3(0.f))
+		: type(t), shader(&sh)
 	{
 		transform.position = pos;
 		transform.rotation = rot;
@@ -87,7 +87,7 @@ private:
 		sendLightUniform(_light);
 	}
 
-	void sendLightUniform(light& l)
+	void sendLightUniform(light l)
 	{
 		(*shader).set1i(("lights[" + std::to_string(this->ID) + "].type").c_str(), l.type);
 		

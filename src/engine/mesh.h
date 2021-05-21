@@ -33,6 +33,14 @@ namespace graphics
 
 			updateVertices();
 		}
+		Mesh(Vertex*& verts, GLuint*& inds, Texture*& texs)
+		{
+			vertices = std::vector<Vertex>(verts, verts + sizeof(verts) / sizeof(Vertex));
+			indices = std::vector<GLuint>(inds, inds + sizeof(inds) / sizeof(GLuint));
+			textures = std::vector<Texture>(texs, texs + sizeof(textures) / sizeof(Texture));
+
+			updateVertices();
+		}
 		Mesh()
 		{
 			updateVertices();

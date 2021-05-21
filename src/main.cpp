@@ -4,10 +4,10 @@
 #pragma region Quad
 std::vector<Vertex> QuadVerts =
 {
-	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
-	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
+	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
+	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
+	Vertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)}
 };
 
 std::vector<GLuint> QuadTris =
@@ -81,14 +81,14 @@ int main(int argc, char** argv)
 #pragma region textures_for_primitives
 	std::vector<Texture> QuadTexs
 	{
-		Texture("res/textures/default.jpg", "diffuse"),
-		Texture("res/textures/default.jpg", "specular")
+		Texture("res/textures/planks.png", "diffuse"),
+		Texture("res/textures/planksSpec.png", "specular")
 	};
 
 	std::vector<Texture> CubeTexs
 	{
-		Texture("res/textures/default.jpg", "diffuse"),
-		Texture("res/textures/default.jpg", "specular")
+		Texture("res/textures/planks.png", "diffuse"),
+		Texture("res/textures/planksSpec.png", "specular")
 	};
 #pragma endregion textures_for_primitives
 	
@@ -103,8 +103,7 @@ int main(int argc, char** argv)
 	quad0.transform.position.x = 2.f;
 	quad0.transform.rotation.z = 90.f;
 
-	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.5f, 0.5f, 0.5f }, {0.f, 0.f, 0.f});
-	Light light1(defaultShader, SPOT_LIGHT_TYPE, { 0.f, 0.1f, 0.f }, {0.f, 0.f, 0.f});
+	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.5f, 0.5f, 0.5f });
 
 	// loop variables BEG
 	tools::Timer deltaTimer;
@@ -119,7 +118,7 @@ int main(int argc, char** argv)
 
 	// camera movement
 	float camSpeed = 1.f;
-	float sensitivity = 2.f;
+	float sensitivity = 1.f;
 
 	// Camera
 	Camera camera(window, { 0.f, 1.f, 2.f });
@@ -220,10 +219,9 @@ int main(int argc, char** argv)
 
 		// Draw
 		light0.render();
-		light1.render();
 
-		quad0.render();
-		cube0.render();
+		quad0.render(defaultShader, camera);
+		cube0.render(defaultShader, camera);
 
 		// Update
 		glfwSwapBuffers(window.window());

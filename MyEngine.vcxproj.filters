@@ -112,6 +112,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\models\duck\Duck.gltf" />
+    <None Include=".gitattributes" />
+    <None Include="README.md" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\Profile.png">

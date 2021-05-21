@@ -182,6 +182,9 @@
     <ClInclude Include="src\__O%27s\VBO.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
     <None Include="res\models\avocado\Avocado.bin" />
     <None Include="res\models\avocado\Avocado.gltf" />
     <None Include="res\models\duck\Duck.bin" />
