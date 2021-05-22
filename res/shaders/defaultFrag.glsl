@@ -1,6 +1,6 @@
 #version 330 core
 
-#define NOT_SOLID_COLOR false
+#define NOT_SOLID_COLOR true
 
 #define INVALID_TYPE_COLOR vec4(1.f, .2f, .95f, 1.f)
 

@@ -25,6 +25,11 @@ namespace graphics
 		{
 			updateVertices();
 		}
+		Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
+			: vertices(vertices), indices(indices), textures()
+		{
+			updateVertices();
+		}
 		Mesh(Vertex* verts, GLsizeiptr vsize, GLuint* inds, GLsizeiptr isize, Texture* texs, GLsizeiptr tsize)
 		{
 			vertices = std::vector<Vertex>(verts, verts + vsize / sizeof(Vertex));
@@ -71,12 +76,12 @@ namespace graphics
 			for (unsigned int i = 0; i < textures.size(); i++)
 			{
 				std::string num;
-				std::string type = textures[i].type;
-				if (type == "diffuse")
+				std::string type = textures[i].type == 0 ? "diffuse" : (textures[i].type == 1 ? "specular" : "error");
+				if (textures[i].type == DIFFUSE_TEXTURE_TYPE)
 				{
 					num = std::to_string(numDiffuse++);
 				}
-				else if (type == "specular")
+				else if (textures[i].type == SPECULAR_TEXTURE_TYPE)
 				{
 					num = std::to_string(numSpecular++);
 				}

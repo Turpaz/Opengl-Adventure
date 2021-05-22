@@ -79,17 +79,12 @@ int main(int argc, char** argv)
 	Input Input(window.window());
 
 #pragma region textures_for_primitives
+	
 	std::vector<Texture> QuadTexs
 	{
-		Texture("res/textures/planks.png", "diffuse"),
-		Texture("res/textures/planksSpec.png", "specular")
+		Texture("res/textures/planks.png", DIFFUSE_TEXTURE_TYPE),
+		Texture("res/textures/planksSpec.png", DIFFUSE_TEXTURE_TYPE)
 	};
-	/*
-	std::vector<Texture> CubeTexs
-	{
-		Texture("res/textures/planks.png", "diffuse"),
-		Texture("res/textures/planksSpec.png", "specular")
-	};*/
 #pragma endregion textures_for_primitives
 	
 	Shader defaultShader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
@@ -227,6 +222,11 @@ int main(int argc, char** argv)
 		glfwSwapBuffers(window.window());
 		glfwPollEvents();
 		//window.update(); // TODO
+	}
+
+	for (int i = 0; i < QuadTexs.size(); i++)
+	{
+		QuadTexs[i].remove();
 	}
 
 	return 0;

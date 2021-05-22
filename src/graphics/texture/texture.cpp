@@ -4,7 +4,7 @@ namespace graphics
 {
 	unsigned char nrOfextures = 0;
 
-	Texture::Texture(const char* image, const char* texType, bool pixelArt, GLuint slot)
+	Texture::Texture(const char* image, char texType, bool pixelArt, GLuint slot)
 		: type(texType)
 	{
 		if (slot == 31)
@@ -17,10 +17,10 @@ namespace graphics
 		stbi_set_flip_vertically_on_load(true);
 		unsigned char* bytes = stbi_load(image, &widthImg, &heightImg, &numColCh, STBI_rgb_alpha);
 
-		glGenTextures(1, &ID);
+		glGenTextures(1, &this->ID);
 		glActiveTexture(GL_TEXTURE0 + slot);
-		unit = slot;
-		glBindTexture(GL_TEXTURE_2D, ID);
+		this->unit = slot;
+		glBindTexture(GL_TEXTURE_2D, this->ID);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, pixelArt ? GL_NEAREST : GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, pixelArt ? GL_NEAREST : GL_LINEAR);
@@ -57,6 +57,7 @@ namespace graphics
 
 	void Texture::remove()
 	{
-		glDeleteTextures(1, &ID);
+		if (ID != sizeof(GLuint))
+			glDeleteTextures(1, &ID);
 	}
 }
