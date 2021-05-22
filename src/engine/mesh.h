@@ -80,8 +80,7 @@ namespace graphics
 				{
 					num = std::to_string(numSpecular++);
 				}
-				//textures[i].texUnit(shader, (type + num).c_str(), i);
-				textures[i].texUnit(shader, (type + num).c_str(), i);
+				shader.set1i((type + num).c_str(), i);
 				textures[i].use();
 			}
 

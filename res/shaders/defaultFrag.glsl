@@ -1,5 +1,7 @@
 #version 330 core
 
+#define NOT_SOLID_COLOR false
+
 #define INVALID_TYPE_COLOR vec4(1.f, .2f, .95f, 1.f)
 
 #define MAX_LIGHTS 256
@@ -30,7 +32,9 @@ in vec3 color;
 in vec2 texCoord;
 
 uniform sampler2D diffuse0;
+uniform sampler2D diffuse1;
 uniform sampler2D specular0;
+uniform sampler2D specular1;
 
 uniform int nrOfLights;
 
@@ -59,7 +63,10 @@ vec4 pointLight(light l)
 	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
 	float specular = specularLight * specAmount;
 
-	return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+	if (NOT_SOLID_COLOR)
+		return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+	else
+		return vec4(color, 1.f) * l.color * (diffuse * inten + ambient) + vec4(color, 1.f) * specular * inten;
 }
 
 vec4 direcLight(light l)
@@ -77,7 +84,10 @@ vec4 direcLight(light l)
 	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
 	float specular = specularLight * specAmount;
 
-	return texture(diffuse0, texCoord) * l.color * (diffuse + ambient) + texture(specular0, texCoord).r * specular;
+	if (NOT_SOLID_COLOR)
+		return texture(diffuse0, texCoord) * l.color * (diffuse + ambient) + texture(specular0, texCoord).r * specular;
+	else
+		return vec4(color, 1.f) * l.color * (diffuse + ambient) + vec4(color, 1.f) * specular;
 }
 
 vec4 spotLight(light l)
@@ -103,7 +113,10 @@ vec4 spotLight(light l)
 	float angle = dot(direction, -lightDirection);
 	float inten = clamp((angle - outerCone) / (innerCone - outerCone), 0.0f, 1.0f);
 
-	return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+	if (NOT_SOLID_COLOR)
+		return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+	else
+		return vec4(color, 1.f) * l.color * (diffuse * inten + ambient) + vec4(color, 1.f) * specular * inten;
 }
 
 void main()
@@ -121,9 +134,6 @@ void main()
 		else
 			endcolor = INVALID_TYPE_COLOR;
 	}
-
-	if (texture(diffuse0, texCoord) == vec4(0.f, 0.f, 0.f, 1.f))
-		endcolor = INVALID_TYPE_COLOR;
 
 	FragColor = endcolor;
 }

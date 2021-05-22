@@ -15,10 +15,9 @@ namespace graphics
 		const char* type;
 		GLuint unit;
 	public:
-		Texture(const char* image, const char* texType = "diffuse", bool pixelArt = false, GLuint slot = sizeof(GLuint));
+		Texture(const char* image, const char* texType = "diffuse", bool pixelArt = false, GLuint slot = 31);
 		~Texture() { this->remove(); }
 		
-		void texUnit(Shader& shader, const char* uniform, GLuint unit);
 		void use();
 		void unuse();
 		void remove();

@@ -4,9 +4,9 @@
 #pragma region Quad
 std::vector<Vertex> QuadVerts =
 {
-	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
-	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
+	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f)},
+	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)}
 };
 
@@ -84,23 +84,23 @@ int main(int argc, char** argv)
 		Texture("res/textures/planks.png", "diffuse"),
 		Texture("res/textures/planksSpec.png", "specular")
 	};
-
+	/*
 	std::vector<Texture> CubeTexs
 	{
 		Texture("res/textures/planks.png", "diffuse"),
 		Texture("res/textures/planksSpec.png", "specular")
-	};
+	};*/
 #pragma endregion textures_for_primitives
 	
 	Shader defaultShader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
-	Mesh quad(QuadVerts, QuadTris, CubeTexs);
-	Mesh cube(CubeVerts, CubeTris, CubeTexs);
+	Mesh quad(QuadVerts, QuadTris, QuadTexs);
+	Mesh cube(CubeVerts, CubeTris, QuadTexs);
 
 	Entity quad0(quad);
 	Entity cube0(cube);
 	cube0.transform.scale /= 5.f;
 	cube0.transform.position.y = 1.f;
-	quad0.transform.position.x = 2.f;
+	quad0.transform.position.x = 1.f;
 	quad0.transform.rotation.z = 90.f;
 
 	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.5f, 0.5f, 0.5f });
@@ -220,8 +220,8 @@ int main(int argc, char** argv)
 		// Draw
 		light0.render();
 
-		quad0.render(defaultShader, camera);
-		cube0.render(defaultShader, camera);
+		quad0.render();
+		cube0.render();
 
 		// Update
 		glfwSwapBuffers(window.window());

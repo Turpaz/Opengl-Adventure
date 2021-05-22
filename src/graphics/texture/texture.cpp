@@ -2,13 +2,16 @@
 
 namespace graphics
 {
-	unsigned char nrOtextures = 0;
+	unsigned char nrOfextures = 0;
 
 	Texture::Texture(const char* image, const char* texType, bool pixelArt, GLuint slot)
 		: type(texType)
 	{
-		if (slot == sizeof(GLuint))
-			slot = nrOtextures++;
+		if (slot == 31)
+		{
+			slot = nrOfextures;
+			nrOfextures++;
+		}
 
 		int widthImg, heightImg, numColCh;
 		stbi_set_flip_vertically_on_load(true);
@@ -26,14 +29,11 @@ namespace graphics
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 		if (numColCh == 4)
-			glTexImage2D
-			(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RGBA,GL_UNSIGNED_BYTE,bytes);
+			glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RGBA,GL_UNSIGNED_BYTE,bytes);
 		else if (numColCh == 3)
-			glTexImage2D
-			(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RGB,GL_UNSIGNED_BYTE,bytes);
+			glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RGB,GL_UNSIGNED_BYTE,bytes);
 		else if (numColCh == 1)
-			glTexImage2D
-			(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RED,GL_UNSIGNED_BYTE,bytes);
+			glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,widthImg,heightImg,0,GL_RED,GL_UNSIGNED_BYTE,bytes);
 		else
 			throw std::invalid_argument("Automatic Texture type recognition failed");
 
@@ -42,11 +42,6 @@ namespace graphics
 		stbi_image_free(bytes);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
-	}
-
-	void Texture::texUnit(Shader& shader, const char* uniform, GLuint unit)
-	{
-		shader.set1i("uniform", unit);
 	}
 
 	void Texture::use()
