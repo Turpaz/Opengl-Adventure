@@ -44,20 +44,25 @@ namespace graphics
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::use()
+	void Texture::use() const
 	{
 		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(GL_TEXTURE_2D, ID);
 	}
 
-	void Texture::unuse()
+	void Texture::unuse() const
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void Texture::remove()
+	void Texture::remove() const
 	{
 		if (ID != sizeof(GLuint))
 			glDeleteTextures(1, &ID);
+	}
+
+	void Texture::copied()
+	{
+		ID = sizeof(GLuint);
 	}
 }

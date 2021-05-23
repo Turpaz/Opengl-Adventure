@@ -224,10 +224,5 @@ int main(int argc, char** argv)
 		//window.update(); // TODO
 	}
 
-	for (int i = 0; i < QuadTexs.size(); i++)
-	{
-		QuadTexs[i].remove();
-	}
-
 	return 0;
 }
