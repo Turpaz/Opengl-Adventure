@@ -147,7 +147,7 @@
     <Image Include="res\models\duck\DuckCM.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\textures\default.jpg">
+    <Image Include="res\textures\default.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

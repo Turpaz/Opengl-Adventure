@@ -200,7 +200,7 @@
     <Image Include="res\models\avocado\Avocado_normal.png" />
     <Image Include="res\models\avocado\Avocado_roughnessMetallic.png" />
     <Image Include="res\models\duck\DuckCM.png" />
-    <Image Include="res\textures\default.jpg" />
+    <Image Include="res\textures\default.png" />
     <Image Include="res\textures\Earth.jpg" />
     <Image Include="res\textures\planks.png" />
     <Image Include="res\textures\planksSpec.png" />

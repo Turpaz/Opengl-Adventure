@@ -29,23 +29,23 @@ std::vector<Vertex> CubeVerts =
 	Vertex{ glm::vec3(1.f, 1.f, -1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{ glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
 
-	Vertex{glm::vec3(1.f,  1.f, -1.f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f) }, // Right Face
-	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Right Face
+	Vertex{glm::vec3(1.f,  1.f, -1.f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
 	Vertex{ glm::vec3(1.f, -1.f, -1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{ glm::vec3(1.f, -1.f, 1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
 
-	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f) }, // Left Face
-	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Left Face
+	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
 	Vertex{ glm::vec3(-1.f, -1.f,  1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{ glm::vec3(-1.f, -1.f, -1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
 
-	Vertex{glm::vec3(1.f,  1.f, -1.f),  glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f) },// Front Face
-	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Front Face
+	Vertex{glm::vec3(1.f,  1.f, -1.f),  glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
 	Vertex{ glm::vec3(1.f, -1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{ glm::vec3(-1.f, -1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
 
-	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f) }, // Back Face
-	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Back Face
+	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
 	Vertex{ glm::vec3(-1.f, -1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
 	Vertex{ glm::vec3(1.f, -1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
 };
@@ -58,17 +58,17 @@ std::vector<GLuint> CubeTris =
 	4, 5, 6, // Up Face
 	4, 6, 7,
 
-	8, 10, 9, // Right Face
-	10, 11, 9,
+	8, 9, 10, // Right Face
+	8, 10, 11,
 
-	12, 14, 13, // Left Face
-	14, 15, 13,
+	12, 13, 14, // Left Face
+	12, 14, 15,
 
-	16, 17, 18, // Front Face
-	17, 19, 18,
+	16, 18, 17, // Front Face
+	16, 19, 18,
 
-	20, 21, 22, // Back Face
-	21, 23, 22
+	20, 22, 21, // Back Face
+	20, 23, 22
 };
 #pragma endregion Cube
 #pragma endregion primitives
@@ -82,8 +82,8 @@ int main(int argc, char** argv)
 	
 	std::vector<Texture> QuadTexs
 	{
-		Texture("res/textures/planks.png", DIFFUSE_TEXTURE_TYPE),
-		Texture("res/textures/planksSpec.png", DIFFUSE_TEXTURE_TYPE)
+		Texture("res/textures/default.png", DIFFUSE_TEXTURE_TYPE),
+		Texture("res/textures/default.png", SPECULAR_TEXTURE_TYPE)
 	};
 #pragma endregion textures_for_primitives
 	
