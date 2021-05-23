@@ -8,6 +8,7 @@
 #define POINT_LIGHT_TYPE (char)0
 #define DIRECTIONAL_LIGHT_TYPE (char)1
 #define SPOT_LIGHT_TYPE (char)2
+#define AMBIENT_LIGHT_TYPE (char)3
 
 namespace engine
 {
@@ -39,8 +40,8 @@ public:
 	glm::vec4 color = glm::vec4(1.f);
 
 	float intensity = 1.0f;
-	float ambient = 0.2f;
-	float specular = 0.5f;
+	float ambient = 0.05f;
+	float specular = 0.2f;
 
 	float outerCone = 0.90f;
 	float innerCone = 0.95f;

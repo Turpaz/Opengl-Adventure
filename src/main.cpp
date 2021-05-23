@@ -1,103 +1,24 @@
 #include "include.h"
 
-#pragma region primitives
-#pragma region Quad
-std::vector<Vertex> QuadVerts =
-{
-	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f)},
-	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)}
-};
-
-std::vector<GLuint> QuadTris =
-{
-	0, 1, 2,
-	0, 2, 3
-};
-#pragma endregion Quad
-#pragma region Cube
-std::vector<Vertex> CubeVerts =
-{
-	Vertex{glm::vec3(-1.f, -1.f,  1.f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},// Down Face
-	Vertex{glm::vec3(-1.f, -1.f, -1.f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(1.f, -1.f, -1.f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f) },
-	Vertex{ glm::vec3(1.f, -1.f,  1.f) , glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
-
-	Vertex{glm::vec3(-1.f, 1.f, 1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f) }, // Up Face
-	Vertex{ glm::vec3(-1.f, 1.f, -1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{ glm::vec3(1.f, 1.f, -1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{ glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
-
-	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Right Face
-	Vertex{glm::vec3(1.f,  1.f, -1.f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
-	Vertex{ glm::vec3(1.f, -1.f, -1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{ glm::vec3(1.f, -1.f, 1.f) , glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
-
-	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Left Face
-	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
-	Vertex{ glm::vec3(-1.f, -1.f,  1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{ glm::vec3(-1.f, -1.f, -1.f) , glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
-
-	Vertex{ glm::vec3(-1.f,  1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Front Face
-	Vertex{glm::vec3(1.f,  1.f, -1.f),  glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
-	Vertex{ glm::vec3(1.f, -1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{ glm::vec3(-1.f, -1.f, -1.f) , glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
-
-	Vertex{ glm::vec3(1.f,  1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)}, // Back Face
-	Vertex{glm::vec3(-1.f,  1.f,  1.f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f) },
-	Vertex{ glm::vec3(-1.f, -1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{ glm::vec3(1.f, -1.f,  1.f) , glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
-};
-
-std::vector<GLuint> CubeTris =
-{
-	0, 2, 1, // Down Face
-	0, 3, 2,
-
-	4, 5, 6, // Up Face
-	4, 6, 7,
-
-	8, 9, 10, // Right Face
-	8, 10, 11,
-
-	12, 13, 14, // Left Face
-	12, 14, 15,
-
-	16, 18, 17, // Front Face
-	16, 19, 18,
-
-	20, 22, 21, // Back Face
-	20, 23, 22
-};
-#pragma endregion Cube
-#pragma endregion primitives
-
 int main(int argc, char** argv)
 {
 	Window window(960, 540, __FILE__);
 	Input Input(window.window());
 	Primitives::initPrimitives();
-
-#pragma region textures_for_primitives
-	
-	std::vector<Texture> QuadTexs
-	{
-		Texture("res/textures/default.png", DIFFUSE_TEXTURE_TYPE),
-		Texture("res/textures/default.png", SPECULAR_TEXTURE_TYPE)
-	};
-#pragma endregion textures_for_primitives
 	
 	Shader defaultShader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
 
 	Entity quad0(Primitives::Quad);
-	Entity cube0(Primitives::Cube);
+	Entity cube0(Primitives::Pyramid);
+	Entity lightMesh0(Primitives::Cube);
+	lightMesh0.transform.scale /= 25.f;
 	cube0.transform.scale /= 5.f;
 	cube0.transform.position.y = 1.f;
 	quad0.transform.position.x = 1.f;
 	quad0.transform.rotation.z = 90.f;
 
-	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.5f, 0.5f, 0.5f });
+	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.f, 1.2f, 0.5f });
+	Light light1(defaultShader, AMBIENT_LIGHT_TYPE);
 
 	// loop variables BEG
 	tools::Timer deltaTimer;
@@ -213,6 +134,10 @@ int main(int argc, char** argv)
 
 		// Draw
 		light0.render();
+
+		lightMesh0.transform.position = light0.transform.position;
+		lightMesh0.transform.rotation = light0.transform.rotation;
+		lightMesh0.render(defaultShader, camera);
 
 		quad0.render();
 		cube0.render();

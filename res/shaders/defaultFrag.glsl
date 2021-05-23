@@ -64,9 +64,9 @@ vec4 pointLight(light l)
 	float specular = specularLight * specAmount;
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+		return texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse * inten + ambient) + vec4(color, 1.f) * specular * inten;
+		return vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
 }
 
 vec4 direcLight(light l)
@@ -85,9 +85,9 @@ vec4 direcLight(light l)
 	float specular = specularLight * specAmount;
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse + ambient) + texture(specular0, texCoord).r * specular;
+		return texture(diffuse0, texCoord) * l.color * (diffuse/* + ambient*/) + texture(specular0, texCoord).r * specular;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse + ambient) + vec4(color, 1.f) * specular;
+		return vec4(color, 1.f) * l.color * (diffuse/* + ambient*/) + vec4(color, 1.f) * specular;
 }
 
 vec4 spotLight(light l)
@@ -114,9 +114,17 @@ vec4 spotLight(light l)
 	float inten = clamp((angle - outerCone) / (innerCone - outerCone), 0.0f, 1.0f);
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse * inten + ambient) + texture(specular0, texCoord).r * specular * inten;
+		return texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse * inten + ambient) + vec4(color, 1.f) * specular * inten;
+		return vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
+}
+
+vec4 ambientLight(light l)
+{
+	if (NOT_SOLID_COLOR)
+		return texture(diffuse0, texCoord) * l.color * l.ambient;
+	else
+		return vec4(color, 1.f) * l.color * l.ambient;
 }
 
 void main()
@@ -131,6 +139,8 @@ void main()
 			endcolor += direcLight(lights[i]);
 		else if (lights[i].type == 2)
 			endcolor += spotLight(lights[i]);
+		else if (lights[i].type == 3)
+			endcolor += ambientLight(lights[i]);
 		else
 			endcolor = INVALID_TYPE_COLOR;
 	}
