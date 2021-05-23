@@ -21,7 +21,7 @@ struct light
 	float outerCone; // 0.90f
 	float innerCone; // 0.95f
 
-	float intenAdd; // 1.0f
+	float intens; // 1.0f
 	float ambient; // 0.2f
 	float specular; // 0.5f
 };
@@ -48,7 +48,7 @@ vec4 pointLight(light l)
 	float dist = length(lightVec);
 	float a = POINT_LIGHT_A;
 	float b = POINT_LIGHT_B;
-	float inten = 1.0f / (a * dist * dist + b * dist + l.intenAdd);
+	float inten = 1.0f / (a * dist * dist + b * dist + 1.0f);
 
 	float ambient = l.ambient;
 
@@ -64,9 +64,9 @@ vec4 pointLight(light l)
 	float specular = specularLight * specAmount;
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
+		return l.intens * texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
+		return l.intens * vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
 }
 
 vec4 direcLight(light l)
@@ -85,9 +85,9 @@ vec4 direcLight(light l)
 	float specular = specularLight * specAmount;
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse/* + ambient*/) + texture(specular0, texCoord).r * specular;
+		return l.intens * texture(diffuse0, texCoord) * l.color * (diffuse/* + ambient*/) + texture(specular0, texCoord).r * specular;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse/* + ambient*/) + vec4(color, 1.f) * specular;
+		return l.intens * vec4(color, 1.f) * l.color * (diffuse/* + ambient*/) + vec4(color, 1.f) * specular;
 }
 
 vec4 spotLight(light l)
@@ -114,17 +114,17 @@ vec4 spotLight(light l)
 	float inten = clamp((angle - outerCone) / (innerCone - outerCone), 0.0f, 1.0f);
 
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
+		return l.intens * texture(diffuse0, texCoord) * l.color * (diffuse * inten/* + ambient*/) + texture(specular0, texCoord).r * specular * inten;
 	else
-		return vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
+		return l.intens * vec4(color, 1.f) * l.color * (diffuse * inten/* + ambient*/) + vec4(color, 1.f) * specular * inten;
 }
 
 vec4 ambientLight(light l)
 {
 	if (NOT_SOLID_COLOR)
-		return texture(diffuse0, texCoord) * l.color * l.ambient;
+		return l.intens * texture(diffuse0, texCoord) * l.color * l.ambient;
 	else
-		return vec4(color, 1.f) * l.color * l.ambient;
+		return l.intens * vec4(color, 1.f) * l.color * l.ambient;
 }
 
 void main()

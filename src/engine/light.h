@@ -26,7 +26,7 @@ typedef struct light
 	float outerCone; // 0.90f
 	float innerCone; // 0.95f
 
-	float intenAdd; // 1.0f
+	float intens; // 1.0f
 	float ambient; // 0.2f
 	float specular; // 0.5f
 } light;
@@ -40,8 +40,8 @@ public:
 	glm::vec4 color = glm::vec4(1.f);
 
 	float intensity = 1.0f;
-	float ambient = 0.05f;
-	float specular = 0.2f;
+	float ambient = 0.1f;
+	float specular = 0.4f;
 
 	float outerCone = 0.90f;
 	float innerCone = 0.95f;
@@ -81,7 +81,7 @@ private:
 		_light.outerCone = this->outerCone;
 		_light.innerCone = this->innerCone;
 
-		_light.intenAdd = this->intensity;
+		_light.intens = this->intensity;
 		_light.ambient = this->ambient;
 		_light.specular = this->specular;
 
@@ -99,7 +99,7 @@ private:
 		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].outerCone").c_str(), l.outerCone);
 		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].innerCone").c_str(), l.innerCone);
 		
-		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].intenAdd").c_str(), l.intenAdd);
+		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].intens").c_str(), l.intens);
 		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].ambient").c_str(), l.ambient);
 		(*shader).set1f(("lights[" + std::to_string(this->ID) + "].specular").c_str(), l.specular);
 	}

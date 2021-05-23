@@ -115,9 +115,17 @@ int main(int argc, char** argv)
 
 		// _________________________________________
 		if (Input.pressed(Keys::H))
-			quad0.transform.rotation.y += 20.0f * delta;
+		{
+			cube0.mesh.vertices = Primitives::Cube.vertices;
+			cube0.mesh.indices = Primitives::Cube.indices;
+			cube0.mesh.updateVertices();
+		}
 		if (Input.pressed(Keys::J))
-			quad0.transform.rotation.y -= 20.0f * delta;
+		{
+			cube0.mesh.vertices = Primitives::Pyramid.vertices;
+			cube0.mesh.indices = Primitives::Pyramid.indices;
+			cube0.mesh.updateVertices();
+		}
 		// _________________________________________
 
 		// End Things To Do / App::Update()
