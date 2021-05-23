@@ -77,6 +77,7 @@ int main(int argc, char** argv)
 {
 	Window window(960, 540, __FILE__);
 	Input Input(window.window());
+	Primitives::initPrimitives();
 
 #pragma region textures_for_primitives
 	
@@ -88,11 +89,9 @@ int main(int argc, char** argv)
 #pragma endregion textures_for_primitives
 	
 	Shader defaultShader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
-	Mesh quad(QuadVerts, QuadTris, QuadTexs);
-	Mesh cube(CubeVerts, CubeTris, QuadTexs);
 
-	Entity quad0(quad);
-	Entity cube0(cube);
+	Entity quad0(Primitives::Quad);
+	Entity cube0(Primitives::Cube);
 	cube0.transform.scale /= 5.f;
 	cube0.transform.position.y = 1.f;
 	quad0.transform.position.x = 1.f;

@@ -38,17 +38,29 @@ namespace graphics
 
 			updateVertices();
 		}
-		Mesh(Vertex*& verts, GLuint*& inds, Texture*& texs)
-		{
-			vertices = std::vector<Vertex>(verts, verts + sizeof(verts) / sizeof(Vertex));
-			indices = std::vector<GLuint>(inds, inds + sizeof(inds) / sizeof(GLuint));
-			textures = std::vector<Texture>(texs, texs + sizeof(textures) / sizeof(Texture));
-
-			updateVertices();
-		}
 		Mesh()
 		{
-			updateVertices();
+			vertices = std::vector<Vertex>
+			{
+				Vertex{ glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 0.0f) },
+				Vertex{ glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(0.0f, 1.0f) },
+				Vertex{ glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f) },
+			};
+
+			indices = std::vector<GLuint>
+			{
+				0, 1, 2
+			};
+
+			textures = std::vector<Texture>
+			{
+				Texture("res/textures/default.png", DIFFUSE_TEXTURE_TYPE)
+			};
+		}
+		Mesh(int dontinit)
+			: vao(1)
+		{
+
 		}
 
 		void updateVertices()

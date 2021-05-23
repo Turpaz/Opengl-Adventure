@@ -19,6 +19,7 @@
 #include "engine/entity.h"
 #include "engine/light.h"
 #include "engine/mesh.h"
+#include "engine/primitives.h"
 
 #include "graphics/window.h"
 #include "graphics/camera.h"
