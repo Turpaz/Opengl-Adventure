@@ -14,6 +14,7 @@ public:
 	Transform transform;
 	Mesh mesh;
 public:
+	Entity() {}
 	Entity(Mesh& m)
 		: transform()
 	{

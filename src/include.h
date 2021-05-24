@@ -14,7 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-#include "input.h"
+#include "engine/input.h"
 
 #include "engine/entity.h"
 #include "engine/light.h"

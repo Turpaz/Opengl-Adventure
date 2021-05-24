@@ -39,6 +39,9 @@
     <ClCompile Include="src\graphics\texture\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\app.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\window.h">
@@ -71,7 +74,7 @@
     <ClInclude Include="src\graphics\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\input.h">
+    <ClInclude Include="src\engine\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tools\maths_tweaks.h">

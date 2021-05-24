@@ -5,59 +5,65 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-class Input
+namespace engine
 {
-private:
-	GLFWwindow* m_window;
-	bool lastKeys[348] = { false };
-	unsigned int mouseMode = GLFW_CURSOR_NORMAL;
-public:
-	Input(GLFWwindow* window)
-		: m_window(window)
+	class Input
 	{
-		//glfwSetKeyCallback(m_window, this->key_callback);
-	}
+	private:
+		GLFWwindow* m_window;
+		bool lastKeys[348] = { false };
+		unsigned int mouseMode = GLFW_CURSOR_NORMAL;
+	public:
+		Input() {}
+		Input(GLFWwindow* window)
+			: m_window(window)
+		{
 
-	bool pressed(int key)
-	{
-		return glfwGetKey(m_window, key) == GLFW_PRESS;
-	}
+		}
 
-	bool released(int key)
-	{
-		return glfwGetKey(m_window, key) == GLFW_RELEASE;
-	}
+		bool pressed(int key)
+		{
+			return glfwGetKey(m_window, key) == GLFW_PRESS;
+		}
 
-	bool mouseDown(int button)
-	{
-		return glfwGetMouseButton(m_window, button) == GLFW_PRESS;
-	}
+		bool released(int key)
+		{
+			return glfwGetKey(m_window, key) == GLFW_RELEASE;
+		}
 
-	glm::vec2 mousePosition()
-	{
-		double xpos, ypos;
-		glfwGetCursorPos(m_window, &xpos, &ypos);
-		return glm::vec2(xpos, ypos);
-	}
-	template <typename T> void mousePosition(T& x, T& y)
-	{
-		glfwGetCursorPos(m_window, &x, &y);
-	}
+		bool mouseDown(int button)
+		{
+			return glfwGetMouseButton(m_window, button) == GLFW_PRESS;
+		}
 
-	void setMouseMode(int mode)
-	{
-		glfwSetInputMode(m_window, GLFW_CURSOR, mode);
-		mouseMode = mode;
-	}
-	unsigned int getMouseMode()
-	{
-		return mouseMode;
-	}
+		glm::vec2 mousePosition()
+		{
+			double xpos, ypos;
+			glfwGetCursorPos(m_window, &xpos, &ypos);
+			return glm::vec2(xpos, ypos);
+		}
+		template <typename T> void mousePosition(T& x, T& y)
+		{
+			glfwGetCursorPos(m_window, &x, &y);
+		}
 
-	// TODO: add scroll input
+		void setMouseMode(int mode)
+		{
+			glfwSetInputMode(m_window, GLFW_CURSOR, mode);
+			mouseMode = mode;
+		}
+		unsigned int getMouseMode()
+		{
+			return mouseMode;
+		}
 
-	// TODO: add controller input
-};
+		// TODO: add press (and not hold) callback
+
+		// TODO: add scroll input
+
+		// TODO: add controller input
+	};
+}
 
 class MouseModes
 {

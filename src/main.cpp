@@ -3,7 +3,7 @@
 int main(int argc, char** argv)
 {
 	Window window(960, 540, __FILE__);
-	Input Input(window.window());
+	engine::Input Input(window.window());
 	Primitives::initPrimitives();
 	
 	Shader defaultShader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
@@ -17,8 +17,10 @@ int main(int argc, char** argv)
 	quad0.transform.position.x = 1.f;
 	quad0.transform.rotation.z = 90.f;
 
-	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.f, 1.2f, 0.5f });
+	Light light0(defaultShader, POINT_LIGHT_TYPE, { 0.5f, 1.2f, 0.5f });
+	light0.intensity = 2.f;
 	Light light1(defaultShader, AMBIENT_LIGHT_TYPE);
+	light0.ambient = 0.2f;
 
 	// loop variables BEG
 	tools::Timer deltaTimer;
