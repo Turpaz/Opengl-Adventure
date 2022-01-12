@@ -1,4 +1,4 @@
-#include "include.h"
+/*#include "include.h"
 
 int main(int argc, char** argv)
 {
@@ -159,4 +159,47 @@ int main(int argc, char** argv)
 	}
 
 	return 0;
+}*/
+
+#include "app.h"
+#include "engine/primitives.h"
+
+App app;
+Primitives Primitive(1);
+//Primitives Primitives::s_Instance;
+
+int main()
+{
+	app = App(960, 540, __FILE__);
+	Primitive = Primitives();
+
+	while (!app.closed())
+	{
+		app.update();
+	}
+}
+
+Entity quad0;
+Entity cube0;
+
+void App::OnCreate()
+{
+	quad0 = Entity((Mesh&)Primitive.Quad());
+	cube0 = Entity((Mesh&)Primitive.Cube());
+}
+
+void App::Update(float delta, engine::Input& Input)
+{
+	quad0.render(app.StandardLit, app.camera);
+	cube0.render(app.StandardLit, app.camera);
+}
+
+void App::FixedUpdate(engine::Input& Input)
+{
+
+}
+
+void App::SecondsUpdate(engine::Input& Input)
+{
+
 }

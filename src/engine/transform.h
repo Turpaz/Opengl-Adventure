@@ -44,4 +44,13 @@ public:
 	{
 		return worldUp;
 	}
+
+	Transform& operator=(const Transform& other)
+	{
+		position = other.position;
+		rotation = other.rotation;
+		scale = other.scale;
+
+		return *this;
+	}
 };

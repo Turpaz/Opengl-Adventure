@@ -16,7 +16,8 @@ namespace graphics
 		int m_Height;
 		char* m_Name;
 	public:
-		Window(int w = 960, int h = 540, const char* n = __FILE__)
+		Window() {} // Don't Init
+		Window(int w, int h, const char* n = __FILE__)
 			: m_Width(w), m_Height(h), m_Name((char*)n)
 		{
 			init();

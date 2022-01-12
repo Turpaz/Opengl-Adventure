@@ -10,7 +10,7 @@ public:
 	GLuint ID;
 	// Constructor that generates a VAO ID
 	VAO();
-	VAO(int dontinit) {}
+	VAO(int dontinit) : ID(-1) {}
 	~VAO() { this->remove(); }
 
 	// Links a VBO Attribute such as a position or color to the VAO

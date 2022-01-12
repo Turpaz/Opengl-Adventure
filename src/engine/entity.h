@@ -14,7 +14,7 @@ public:
 	Transform transform;
 	Mesh mesh;
 public:
-	Entity() {}
+	Entity() : mesh(1) {}
 	Entity(Mesh& m)
 		: transform()
 	{
@@ -23,6 +23,16 @@ public:
 		mesh.textures = m.textures;
 
 		mesh.updateVertices();
+	}
+
+	Entity& operator=(const Entity& other)
+	{
+		this->transform = other.transform;
+		this->mesh = other.mesh;
+		this->mainCamera = other.mainCamera;
+		this->mainShader = other.mainShader;
+
+		return *this;
 	}
 
 	void render()

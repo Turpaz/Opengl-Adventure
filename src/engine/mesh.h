@@ -26,8 +26,22 @@ namespace graphics
 			updateVertices();
 		}
 		Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
-			: vertices(vertices), indices(indices), textures()
+			: vertices(vertices), indices(indices)
 		{
+			textures = std::vector<Texture>{ Texture("res/textures/default.png") };
+
+			updateVertices();
+		}
+		Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures)
+			: vertices(vertices), indices(indices), textures(textures)
+		{
+			updateVertices();
+		}
+		Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices)
+			: vertices(vertices), indices(indices), textures(textures)
+		{
+			textures = std::vector<Texture>{ Texture("res/textures/default.png") };
+
 			updateVertices();
 		}
 		Mesh(Vertex* verts, GLsizeiptr vsize, GLuint* inds, GLsizeiptr isize, Texture* texs, GLsizeiptr tsize)

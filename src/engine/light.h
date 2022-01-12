@@ -12,7 +12,7 @@
 
 namespace engine
 {
-	unsigned int lightCount = 0;
+	__declspec(selectany) unsigned int lightCount = 0;
 }
 
 typedef struct light
@@ -30,6 +30,8 @@ typedef struct light
 	float ambient; // 0.2f
 	float specular; // 0.5f
 } light;
+
+using namespace graphics;
 
 class Light
 {

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "include.h"
 
 using Shader = graphics::Shader;
@@ -7,7 +9,10 @@ class App
 public:
 	Window window;
 	engine::Input Input;
+	Shader StandardLit;
+	Camera camera;
 
+	// Delta & FPS variables
 	float delta = 0;
 	const int fixedFPS = 60;
 	bool printFpsEverySecond = true;
@@ -19,14 +24,13 @@ private:
 	int frames = 0;
 public:
 	App() {}
-	App(int w = 960, int h = 540, const char* n = __FILE__)
+	App(int w, int h, const char* n = __FILE__)
 	{
 		window = Window(w, h, n);
 		Input = engine::Input(this->window.window());
-		Primitives::initPrimitives();
-		Camera camera(window);
 
-		Shader StandardLit("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
+		Camera camera = Camera(this->window);
+		Shader StandardLit = Shader("res/shaders/defaultVert.glsl", "res/shaders/defaultFrag.glsl");
 
 		this->OnCreate();
 	}
@@ -75,19 +79,34 @@ public:
 
 		if (Input.getMouseMode() == MouseModes::disabled)
 			glfwSetCursorPos(this->window.window(), (this->window.width() / 2), (this->window.height() / 2));
-		
+
 		// Update
 		glfwSwapBuffers(this->window.window());
 		glfwPollEvents();
 	}
 
-	void draw()
-	{
-
-	}
+	inline bool closed() { return window.closed(); }
 
 	static void OnCreate();
 	static void Update(const float delta, engine::Input& Input);
 	static void FixedUpdate(engine::Input& Input);
 	static void SecondsUpdate(engine::Input& Input);
+
+	App& operator=(const App& other)
+	{
+		window = other.window;
+		Input = other.Input;
+		printFpsEverySecond = other.printFpsEverySecond;
+		deltaTimer = other.deltaTimer;
+		fixedDeltaTimer = other.fixedDeltaTimer;
+		secondsTimer = other.secondsTimer;
+		frames = other.frames;
+
+		return *this;
+	}
+private:
+	void draw()
+	{
+
+	}
 };

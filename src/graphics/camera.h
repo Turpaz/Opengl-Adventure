@@ -26,6 +26,11 @@ public:
 	bool orthographic_view;
 	Transform transform;
 public:
+	Camera()
+		: m_window((Window&)Window()), fov(90.f), near(0.1f), far(100.f), orthographic_view(false)
+	{
+		transform.position = glm::vec3(0.f, 0.f, 0.f);
+	}
 	Camera(Window& win, glm::vec3 p = glm::vec3(0.f))
 		: m_window(win), fov(90.f), near(0.1f), far(100.f), orthographic_view(false)
 	{
